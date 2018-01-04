@@ -5,8 +5,65 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.vkb24312.gameAttempt</groupId>
-    <artifactId>Game Attempt</artifactId>
+    <artifactId>Game-Attempt</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <scm>
+        <connection>github.com/vkb24312/GameAttempt.git</connection>
+        <developerConnection>github.com/vkb24312/GameAttempt.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>github.com/vkb24312/GameAttempt.git</url>
+    </scm>
+
+    <build>
+
+        <directory>${project.basedir}/target</directory>
+        <outputDirectory>${project.build.directory}/classes</outputDirectory>
+        <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <finalName>${project.artifactId} ${project.version}</finalName>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <version>3.0.0</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <version>3.7.0</version>
+
+                <configuration>
+                    <source>1.9</source>
+                    <target>1.9</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${project.groupId}.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-changelog-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <version>2.3</version>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
