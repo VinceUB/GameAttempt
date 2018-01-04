@@ -6,6 +6,6 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args){
-        Information info = new Information(new Dimension(300, 300));
+        Information info = new Information();
     }
 }
