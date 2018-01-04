@@ -60,4 +60,6 @@ public class User {
         inventory.add(inventory.toArray().length, item);
     }
     //</editor-fold>
+
+    
 }

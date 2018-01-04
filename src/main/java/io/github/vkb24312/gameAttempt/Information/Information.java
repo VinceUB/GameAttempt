@@ -9,22 +9,21 @@ public class Information {
         frame = new JFrame();
         frame.setSize(frameSize);
         frame.setVisible(true);
-        panel = new JPanel();
 
         JPanel mainPanel = new JPanel(new CardLayout());
 
         frame.add(mainPanel);
 
-        mainPanel.add(panel);
+        mainPanel.add(new JPanel());
 
         if(backButtonVisible){
-            panel.setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()-20));
+            mainPanel.getComponent(0).setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()-20));
             JPanel backPanel = new JPanel();
             mainPanel.add(backPanel);
             backPanel.add(new JButton("Back"));
             backPanel.getComponent(0).setBounds(backPanel.getComponent(0).getX(), backPanel.getComponent(0).getY(), backPanel.getComponent(0).getWidth(), 20);
         } else {
-            panel.setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()));
+            frame.getComponent(0).setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()));
         }
         //</editor-fold>
 
@@ -32,7 +31,6 @@ public class Information {
     }
     public JFrame frame;
     public User user;
-    public JPanel panel;
 
     public boolean backButtonVisible = true;
 }
