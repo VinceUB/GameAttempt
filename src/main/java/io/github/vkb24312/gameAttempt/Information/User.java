@@ -12,17 +12,20 @@ public class User {
     //</editor-fold>
 
     //<editor-fold desc="Names">
-    private String name_personal;
-    private String name_formal;
-    private String name_full;
+    public String name_personal;
+    public String name_formal;
+    public String name_full;
+    public String name_stranger;
 
     public String getName(int nameType){
         if(nameType==0){
             return name_personal;
         } else if(nameType==1){
             return name_formal;
-        } else if (nameType==2){
+        } else if (nameType==2) {
             return name_full;
+        } else if(nameType==3){
+            return name_stranger;
         } else {
             throw new IllegalArgumentException("nameType cannot be less than 0 or more than 2");
         }
@@ -31,6 +34,7 @@ public class User {
     public static final int NAMETYPE_PERSONAL = 0;
     public static final int NAMETYPE_FORMAL = 1;
     public static final int NAMETYPE_FULL = 2;
+    public static final int NAMETYPE_NONPERSONAL = 3;
     //</editor-fold>
 
     //<editor-fold desc="Inventory">

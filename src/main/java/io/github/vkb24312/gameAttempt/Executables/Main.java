@@ -7,5 +7,6 @@ import java.awt.*;
 public class Main {
     public static void main(String[] args){
         Information info = new Information();
+        Login.main(info);
     }
 }
