@@ -18,6 +18,15 @@ public class Login {
     }
 
     public static void main(Information info){
+        try {
+            File godUserFile = new File("sudo.xml");
+            FileWriter fw = new FileWriter(godUserFile);
+            fw.write("<isPlayable>false</isPlayable>");
+            fw.close();
+        } catch (IOException ignore){
+            Login.main(info);
+        }
+
         JFrame frame = new JFrame("Log into the Game");
         frame.setVisible(true);
 
@@ -64,7 +73,22 @@ public class Login {
                 try {
                     XStream xStream = new XStream();
                     File userFile = new File( userName.getText() + ".xml");
-                    userFile.createNewFile();
+                    if(userFile.createNewFile()){
+                        System.out.println("Created new User file");
+                    } else {
+                        registerPanel.add(new JLabel("Username already taken. Try another one"));
+
+                        registerFrame.setVisible(false);
+                        registerFrame.setVisible(true);
+                        if(userName.getText().equals("sudo")) {
+                            try {
+                                throw new IllegalArgumentException("God is too powerful to play this");
+                            } catch (IllegalArgumentException e2) {
+                                e2.printStackTrace();
+                                System.exit(24);
+                            }
+                        }
+                    }
 
                     FileWriter fileWriter = new FileWriter(userFile);
                     fileWriter.write(xStream.toXML(user));
@@ -73,6 +97,10 @@ public class Login {
                     i.printStackTrace();
                 }
 
+                registerPanel.add(new JLabel("To start playing, press \"Back\" and then log in"));
+
+                registerFrame.setVisible(false);
+                registerFrame.setVisible(true);
             });
             //</editor-fold>
 
@@ -80,25 +108,32 @@ public class Login {
             userName.setRows(2);
             userName.setColumns(12);
             userName.setLineWrap(true);
+            userName.setWrapStyleWord(true);
             password.setRows(2);
             password.setColumns(12);
             password.setLineWrap(true);
+            password.setWrapStyleWord(true);
             passwordHint.setColumns(24);
             passwordHint.setRows(3);
             passwordHint.setLineWrap(true);
+            passwordHint.setWrapStyleWord(true);
 
             fullName.setRows(2);
             fullName.setColumns(24);
             fullName.setLineWrap(true);
+            fullName.setWrapStyleWord(true);
             personalName.setRows(2);
             personalName.setColumns(12);
             personalName.setLineWrap(true);
+            personalName.setWrapStyleWord(true);
             nonPersonalName.setColumns(12);
             nonPersonalName.setLineWrap(true);
             nonPersonalName.setRows(2);
+            nonPersonalName.setWrapStyleWord(true);
             formalName.setRows(2);
             formalName.setColumns(24);
             formalName.setLineWrap(true);
+            formalName.setWrapStyleWord(true);
 
             back.setSize(new Dimension(50, 20));
             submit.setSize(new Dimension(50, 20));
@@ -140,6 +175,14 @@ public class Login {
 
             //<editor-fold desc="ActionListeners">
             submit.addActionListener(e1 -> {
+                if(username.getText().equals("sudo")){
+                    try {
+                        throw new IllegalArgumentException("God is too powerful to play this");
+                    } catch (IllegalArgumentException e2){
+                        e2.printStackTrace();
+                        System.exit(24);
+                    }
+                }
                 try {
                     File userFile = new File(username.getText() + ".xml");
 
@@ -149,7 +192,7 @@ public class Login {
                     if(user.password.equals(password.getText())){
 
                     } else {
-                        passwordHint.setText("Password hint: "+user.passwordHint);
+                        passwordHint.setText("Your password hint is: "+user.passwordHint);
                     }
                 } catch(StreamException i){
                     passwordHint.setText("Wrong Username - Press back to register");
