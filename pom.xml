@@ -51,7 +51,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>${project.groupId}.Main</mainClass>
+                            <mainClass>${project.groupId}.Executables.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
