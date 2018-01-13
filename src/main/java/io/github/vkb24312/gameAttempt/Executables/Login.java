@@ -208,7 +208,7 @@ public class Login {
                     User user = (User) xStream.fromXML(userFile);
 
                     if(user.password.equals(password.getText())){
-
+                        aBoolean = true;
                     } else {
                         passwordHint.setText("Your password hint is: "+user.passwordHint);
                     }
@@ -256,5 +256,13 @@ public class Login {
         frame.setSize(new Dimension(300, 300));
 
         frame.setDefaultCloseOperation(3);
+
+        while(!aBoolean){
+            try {
+                Thread.sleep(2);
+            } catch (InterruptedException ignore){
+            }
+        }
+        return;
     }
 }

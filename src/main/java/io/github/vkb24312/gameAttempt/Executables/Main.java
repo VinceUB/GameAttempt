@@ -8,5 +8,6 @@ public class Main {
     public static void main(String[] args){
         Information info = new Information();
         Login.main(info);
+        System.out.println("Finished execution");
     }
 }

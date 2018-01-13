@@ -109,7 +109,7 @@ public class User implements Character {
     }
     //</editor-fold>
 
-    Sprite sprite = new Sprite();
+    static Sprite sprite = new Sprite();
 
     //<editor-fold desc="Sprite Animation">
     int x = 0;
