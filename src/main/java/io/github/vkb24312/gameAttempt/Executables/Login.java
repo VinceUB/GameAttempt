@@ -1,10 +1,9 @@
 package io.github.vkb24312.gameAttempt.Executables;
 
-import com.oracle.tools.packager.Log;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.StreamException;
 import io.github.vkb24312.gameAttempt.Information.Information;
-import io.github.vkb24312.gameAttempt.Information.User;
+import io.github.vkb24312.gameAttempt.Information.Characters.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,14 +17,26 @@ public class Login {
     }
 
     public static void main(Information info){
+        //<editor-fold desc="Godly stuff">
         try {
             File godUserFile = new File("sudo.xml");
             FileWriter fw = new FileWriter(godUserFile);
-            fw.write("<isPlayable>false</isPlayable>");
+            fw.write("<io.github.vkb24312.gameAttempt.Information.Characters.User>\n" +
+                    "    <username>sudo</username>\n" +
+                    "    <password>N/A</password>\n" +
+                    "    <passwordHint>N/A</passwordHint>\n" +
+                    "    <name__personal>God</name__personal>\n" +
+                    "    <name__formal>God</name__formal>\n" +
+                    "    <name__full>God</name__full>\n" +
+                    "    <name__stranger>God</name__stranger>\n" +
+                    "    <inventory>Everything</inventory>\n" +
+                    "    <isPlayable>false</isPlayable>\n" +
+                    "</io.github.vkb24312.gameAttempt.Information.Characters.User>");
             fw.close();
         } catch (IOException ignore){
             Login.main(info);
         }
+        //</editor-fold>
 
         JFrame frame = new JFrame("Log into the Game");
         frame.setVisible(true);
@@ -61,7 +72,14 @@ public class Login {
             });
 
             submit.addActionListener(e1 ->{
-                User user = new User();
+                User user;
+                try{
+                    user = new User();
+                } catch (IOException e3){
+                    user = null;
+                    e3.printStackTrace();
+                    System.exit(1);
+                }
                 user.username = userName.getText();
                 user.password = password.getText();
                 user.passwordHint = passwordHint.getText();
