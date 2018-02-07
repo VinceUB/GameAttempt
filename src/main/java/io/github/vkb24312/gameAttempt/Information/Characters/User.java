@@ -15,11 +15,14 @@ import java.util.ArrayList;
 public class User implements Character {
     public User() throws IOException{
         //<editor-fold desc="Sprite init">
-        System.out.println(getClass().getClassLoader().getResource("Sprites/user/user_walk_bac.png").getFile());
-        BufferedImage upSpriteMove = ImageIO.read(new File(getClass().getClassLoader().getResource("Sprites/user/user_walk_bac.png").getFile()));
-        BufferedImage downSpriteMove = ImageIO.read(new File(getClass().getClassLoader().getResource("Sprites/user/user_walk_for.png").getFile()));
-        BufferedImage rightSpriteMove = ImageIO.read(new File(getClass().getClassLoader().getResource("Sprites/user/user_walk_rig.png").getFile()));
-        BufferedImage leftSpriteMove = ImageIO.read(new File(getClass().getClassLoader().getResource("Sprites/user/user_walk_lef.png").getFile()));
+        String userFolder = new File(getClass().getClassLoader().getResource("Sprites/user/").getFile()).getAbsolutePath()+System.getProperty("file.separator");
+        //String userFolder = new File("Sprites"+System.getProperty("file.separator")+"user"+System.getProperty("file.separator")).getAbsolutePath()+System.getProperty("file.separator");
+        System.out.println(userFolder);
+        System.out.println(new File(userFolder+"user_walk_bac.png"));
+        BufferedImage upSpriteMove = ImageIO.read(new File(userFolder+"user_walk_bac.png"));
+        BufferedImage downSpriteMove = ImageIO.read(new File(userFolder+"user_walk_for.png"));
+        BufferedImage rightSpriteMove = ImageIO.read(new File(userFolder+"user_walk_rig.png"));
+        BufferedImage leftSpriteMove = ImageIO.read(new File(userFolder+"user_walk_lef.png"));
 
         for (int i = 0; i < 4; i++) {
             int x;
