@@ -205,15 +205,21 @@ public class Login {
                     File userFile = new File(username.getText() + ".xml");
 
                     XStream xStream = new XStream();
-                    User user = (User) xStream.fromXML(userFile);
+
+                    FileOutputStream fos = new FileOutputStream(userFile);
+
+                    User user = (User) xStream.fromXML(fos.toString());
+                    fos.close();
 
                     if(user.password.equals(password.getText())){
                         aBoolean = true;
                     } else {
                         passwordHint.setText("Your password hint is: "+user.passwordHint);
                     }
-                } catch(StreamException i){
+                } catch(StreamException | FileNotFoundException ignore){
                     passwordHint.setText("Wrong Username - Press back to register");
+                } catch (IOException i){
+                    i.printStackTrace();
                 }
             });
 
@@ -263,6 +269,5 @@ public class Login {
             } catch (InterruptedException ignore){
             }
         }
-        return;
     }
 }
