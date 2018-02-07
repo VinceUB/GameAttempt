@@ -49,7 +49,7 @@ public class Login {
         register.addActionListener(e ->{
             frame.dispose();
             //<editor-fold desc="Initialization">
-            JFrame registerFrame = new JFrame("Register");
+            final JFrame registerFrame = new JFrame("Register");
             JPanel registerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
             JLabel notification = new JLabel("Replace the values of the boxes with your desired value");
             JTextArea userName = new JTextArea("Username");
@@ -68,6 +68,7 @@ public class Login {
             //<editor-fold desc="ActionListeners">
             back.addActionListener(e1 -> {
                 registerFrame.dispose();
+
                 main(info);
             });
 
@@ -91,8 +92,20 @@ public class Login {
                 try {
                     XStream xStream = new XStream();
                     File userFile = new File( userName.getText() + ".xml");
-                    if(userFile.createNewFile()){
+                    if(!userFile.exists()){
+                        userFile.createNewFile();
                         System.out.println("Created new User file");
+
+                        FileWriter fileWriter = new FileWriter(userFile);
+                        fileWriter.write(xStream.toXML(user));
+                        fileWriter.close();
+
+                        info.user = user;
+
+                        registerPanel.add(new JLabel("To start playing, press \"Back\" and then log in"));
+
+                        registerFrame.setVisible(false);
+                        registerFrame.setVisible(true);
                     } else {
                         registerPanel.add(new JLabel("Username already taken. Try another one"));
 
@@ -106,19 +119,11 @@ public class Login {
                                 System.exit(24);
                             }
                         }
-                    }
 
-                    FileWriter fileWriter = new FileWriter(userFile);
-                    fileWriter.write(xStream.toXML(user));
-                    fileWriter.close();
+                    }
                 } catch (IOException i){
                     i.printStackTrace();
                 }
-
-                registerPanel.add(new JLabel("To start playing, press \"Back\" and then log in"));
-
-                registerFrame.setVisible(false);
-                registerFrame.setVisible(true);
             });
             //</editor-fold>
 
