@@ -14,4 +14,8 @@ public class Information {
         }
     }
     public User user;
+
+    static public void load(){
+
+    }
 }

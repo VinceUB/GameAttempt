@@ -8,6 +8,7 @@ import io.github.vkb24312.gameAttempt.Information.Characters.User;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.Random;
 
 public class Login {
     static private boolean aBoolean = false;
@@ -67,9 +68,13 @@ public class Login {
 
             //<editor-fold desc="ActionListeners">
             back.addActionListener(e1 -> {
+                System.out.println(1);
+
                 registerFrame.dispose();
 
+                System.out.println(2);
                 main(info);
+                System.out.println(3);
             });
 
             submit.addActionListener(e1 ->{
@@ -206,25 +211,43 @@ public class Login {
                         System.exit(24);
                     }
                 }
+
+                String test = username.getText();
+
                 try {
                     File userFile = new File(username.getText() + ".xml");
 
                     XStream xStream = new XStream();
 
-                    FileOutputStream fos = new FileOutputStream(userFile);
+                    FileInputStream fos = new FileInputStream(userFile);
 
-                    User user = (User) xStream.fromXML(fos.toString());
+                    int content;
+
+                    String userXML = Integer.toString(new Random().nextInt());
+
+                    while((content = fos.read()) != -1){
+                        userXML = new StringBuilder(userXML).append((char) content).toString();
+                    }
+
+                    userXML = new StringBuilder(userXML).deleteCharAt(0).toString();
+
+                    System.out.println(userXML);
+
+                    User user = (User) xStream.fromXML(userXML);
                     fos.close();
 
                     if(user.password.equals(password.getText())){
+                        info.user = user;
                         aBoolean = true;
                     } else {
                         passwordHint.setText("Your password hint is: "+user.passwordHint);
                     }
-                } catch(StreamException | FileNotFoundException ignore){
+                } catch(FileNotFoundException ignore){
                     passwordHint.setText("Wrong Username - Press back to register");
                 } catch (IOException i){
                     i.printStackTrace();
+                } catch (StreamException ignore){
+                    passwordHint.setText("Corrupted Userfile - Please register with a different username");
                 }
             });
 
@@ -271,8 +294,10 @@ public class Login {
         while(!aBoolean){
             try {
                 Thread.sleep(2);
-            } catch (InterruptedException ignore){
+            } catch (InterruptedException e){
+                e.printStackTrace();
             }
         }
+
     }
 }
