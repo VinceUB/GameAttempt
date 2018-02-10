@@ -1,7 +1,9 @@
 package io.github.vkb24312.gameAttempt.Information;
 
+import io.github.vkb24312.gameAttempt.Executables.Game;
 import io.github.vkb24312.gameAttempt.Information.Characters.User;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class Information {
@@ -15,7 +17,9 @@ public class Information {
     }
     public User user;
 
-    static public void load(){
-
+    public void load(){
+        if(user.room==-1) new Game().testRoom(this);
     }
+
+    public JFrame gameFrame = new JFrame("Game");
 }

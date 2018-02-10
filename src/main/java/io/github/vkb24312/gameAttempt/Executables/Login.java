@@ -23,15 +23,18 @@ public class Login {
             File godUserFile = new File("sudo.xml");
             FileWriter fw = new FileWriter(godUserFile);
             fw.write("<io.github.vkb24312.gameAttempt.Information.Characters.User>\n" +
-                    "    <username>sudo</username>\n" +
-                    "    <password>N/A</password>\n" +
-                    "    <passwordHint>N/A</passwordHint>\n" +
-                    "    <name__personal>God</name__personal>\n" +
-                    "    <name__formal>God</name__formal>\n" +
-                    "    <name__full>God</name__full>\n" +
-                    "    <name__stranger>God</name__stranger>\n" +
-                    "    <inventory>Everything</inventory>\n" +
-                    "    <isPlayable>false</isPlayable>\n" +
+                    "  <username>sudo</username>\n" +
+                    "  <password>N/A</password>\n" +
+                    "  <passwordHint>N/A</passwordHint>\n" +
+                    "  <room>"+Long.toString((long)Integer.MAX_VALUE+1)+"</room>\n" +
+                    "  <name__personal>God</name__personal>\n" +
+                    "  <name__formal>God</name__formal>\n" +
+                    "  <name__full>God</name__full>\n" +
+                    "  <name__stranger>God</name__stranger>\n" +
+                    "  <inventory>Everything</inventory>\n" +
+                    "  <x>-1</x>" +
+                    "  <y>-1</y>" +
+                    "  <isPlayable>false</isPlayable>\n" +
                     "</io.github.vkb24312.gameAttempt.Information.Characters.User>");
             fw.close();
         } catch (IOException ignore){
@@ -93,6 +96,8 @@ public class Login {
                 user.name_formal = formalName.getText();
                 user.name_personal = personalName.getText();
                 user.name_full = fullName.getText();
+
+                user.room = -1;
 
                 try {
                     XStream xStream = new XStream();
@@ -223,7 +228,7 @@ public class Login {
 
                     int content;
 
-                    String userXML = Integer.toString(new Random().nextInt());
+                    String userXML = Integer.toString(new Random().nextInt(10));
 
                     while((content = fos.read()) != -1){
                         userXML = new StringBuilder(userXML).append((char) content).toString();
@@ -247,7 +252,7 @@ public class Login {
                 } catch (IOException i){
                     i.printStackTrace();
                 } catch (StreamException ignore){
-                    passwordHint.setText("Corrupted Userfile - Please register with a different username");
+                    passwordHint.setText("Corrupted Userfile - Register with a different username");
                 }
             });
 
@@ -299,5 +304,6 @@ public class Login {
             }
         }
 
+        info.load();
     }
 }

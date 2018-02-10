@@ -56,6 +56,7 @@ public class User implements Character {
     public String username;
     public String password;
     public String passwordHint;
+    public int room;
     //</editor-fold>
 
     //<editor-fold desc="Names">
@@ -115,8 +116,8 @@ public class User implements Character {
     static Sprite sprite = new Sprite();
 
     //<editor-fold desc="Sprite Animation">
-    int x = 0;
-    int y = 0;
+    public int x = 0;
+    public int y = 0;
     public Image currentSprite;
 
     public void moveDown(){
