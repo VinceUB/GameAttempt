@@ -81,6 +81,7 @@ public class Login {
             });
 
             submit.addActionListener(e1 ->{
+                frame.dispose();
                 User user;
                 try{
                     user = new User();
@@ -208,6 +209,7 @@ public class Login {
 
             //<editor-fold desc="ActionListeners">
             submit.addActionListener(e1 -> {
+                frame.dispose();
                 if(username.getText().equals("sudo")){
                     try {
                         throw new IllegalArgumentException("God is too powerful to play this");
@@ -244,6 +246,7 @@ public class Login {
                     if(user.password.equals(password.getText())){
                         info.user = user;
                         aBoolean = true;
+
                     } else {
                         passwordHint.setText("Your password hint is: "+user.passwordHint);
                     }
@@ -258,7 +261,7 @@ public class Login {
 
             backButton.addActionListener(e2 -> {
                 loginFrame.dispose();
-                main(info);
+                Main.main(null);
             });
             //</editor-fold>
 

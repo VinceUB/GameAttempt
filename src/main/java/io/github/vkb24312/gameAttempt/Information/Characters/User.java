@@ -49,6 +49,7 @@ public class User implements Character {
         sprite.spr_still_right = new ImageIcon(getClass().getClassLoader().getResource("Sprites/user/user_still_rig.png").getFile()).getImage();
 
         sprite.icon = sprite.spr_still_down;
+        currentSprite = sprite.spr_still_down;
         //</editor-fold>
     }
 
@@ -113,7 +114,7 @@ public class User implements Character {
     }
     //</editor-fold>
 
-    static Sprite sprite = new Sprite();
+    Sprite sprite = new Sprite();
 
     //<editor-fold desc="Sprite Animation">
     public int x = 0;

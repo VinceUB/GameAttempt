@@ -17,23 +17,18 @@ public class Game extends JPanel{
         Game.info.user.x = 150;
         Game.info.user.y = 150;
 
-        Game.info.gameFrame.setVisible(false);
-        Game.info.gameFrame.setVisible(true);
-        System.out.println("repaint");
+        repaint();
+
+
     }
 
     @Override
     public void paint(Graphics g){
+        System.out.println("paint");
+        super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
-        while(Game.info==null){
-            try{
-                Thread.sleep(3);
-            } catch (InterruptedException e){
-                e.printStackTrace();
-            }
+        if(info.user.currentSprite!=null){
+            g2d.drawImage(info.user.currentSprite, info.user.x, info.user.y, null);
         }
-        g2d.drawImage(info.user.currentSprite, info.user.x, info.user.y, null);
     }
-
-    //TODO: Get the sprite to display on screen
 }
