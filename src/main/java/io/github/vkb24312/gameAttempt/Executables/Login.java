@@ -173,7 +173,7 @@ public class Login {
             submit.setSize(new Dimension(50, 20));
 
             registerFrame.setDefaultCloseOperation(3);
-            registerFrame.setSize(370, 300);
+            registerFrame.setSize(350, 300);
             registerFrame.setVisible(true);
             //</editor-fold>
 
