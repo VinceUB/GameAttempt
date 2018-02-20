@@ -114,7 +114,7 @@ public class User implements Character {
     }
     //</editor-fold>
 
-    Sprite sprite = new Sprite();
+    private Sprite sprite = new Sprite();
 
     //<editor-fold desc="Sprite Animation">
     public int x = 0;
@@ -123,14 +123,14 @@ public class User implements Character {
 
     public void moveDown(){
         for (int i = 0; i < 4; i++) {
-            y--;
+            y++;
             currentSprite = sprite.spr_walk_down[i];
         }
     }
 
     public void moveUp(){
         for (int i = 0; i < 4; i++) {
-            y++;
+            y--;
             currentSprite = sprite.spr_walk_up[i];
         }
     }

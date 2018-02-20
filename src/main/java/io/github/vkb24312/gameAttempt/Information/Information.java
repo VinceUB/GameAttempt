@@ -14,6 +14,7 @@ public class Information {
             e.printStackTrace();
             System.exit(1);
         }
+        gameFrame.setDefaultCloseOperation(3);
     }
     public User user;
 

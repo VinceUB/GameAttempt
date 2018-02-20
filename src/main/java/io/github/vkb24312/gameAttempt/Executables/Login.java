@@ -245,6 +245,7 @@ public class Login {
 
                     if(user.password.equals(password.getText())){
                         info.user = user;
+                        loginFrame.dispose();
                         aBoolean = true;
 
                     } else {
@@ -306,7 +307,6 @@ public class Login {
                 e.printStackTrace();
             }
         }
-
         info.load();
     }
 }
